@@ -1,0 +1,15 @@
+<header class="showcase-top">
+    <div [routerLink]="['/']" class="logo">
+        <img [src]="logo" alt="" />
+    </div>
+    <div *ngIf="isLogIn ; else elseBlock" class="login">
+        <span>{{userName}}</span>
+        <button id="out">Log Out</button>
+        
+    </div>
+    <ng-template #elseBlock>
+        <div class="button-area">
+            <a [routerLink]="['/login']" class="btn btn-rounded">Log in</a>
+        </div>
+    </ng-template>
+</header>

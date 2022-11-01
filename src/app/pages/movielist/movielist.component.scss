@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+  transition: all 0.5s ease;
+  background: hsl(222, 25%, 10%);
+  color: vhsl(0, 0%, 88%);
+  -webkit-font-smoothing: antialiased;
+}
+
+/**
+ * more-intuitive box-sizing model.
+ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background: hsl(222, 25%, 10%);
+  color: vhsl(0, 0%, 88%);
+  -webkit-font-smoothing: antialiased;
+}
+
+.movies-grid {
+    // display: grid;
+    // grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    // //grid-template-columns: auto auto auto;
+    // gap: 30px;
+
+
+    display: inline-block;
+    margin-bottom: 60px;
+  }
+  

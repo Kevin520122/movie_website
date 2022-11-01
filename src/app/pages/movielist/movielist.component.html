@@ -1,0 +1,10 @@
+<app-header></app-header>
+<div class="movies-grid" 
+*ngFor="let movie of movielist"
+infinite-scroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="1000"
+  (scrolled)="onScroll()"
+>
+    <app-movie-item [movie]="movie"></app-movie-item>
+</div>
