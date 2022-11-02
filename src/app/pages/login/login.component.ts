@@ -9,6 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { debounceTime, map, Observable } from 'rxjs';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-login',
@@ -28,67 +29,40 @@ export class LoginComponent implements OnInit {
   get pwd(): FormControl {
     return this.loginForm.get('pwd') as FormControl;
   } 
-  constructor(private fb: FormBuilder, private http: HttpClient) { }
+  constructor(private fb: FormBuilder, private http: HttpClient, public accountService: AccountService) { }
   
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.email, Validators.required]],
-      pwd: ['', [Validators.required]],
+      email: ['', [Validators.email, Validators.required], , [this.asyncCheckEmail]],
+      pwd: ['', [Validators.required], [this.asyncCheckPassword]],
     });
   }
-
-  private asyncCheckEmail = (
-    control: FormControl
-  ): Observable<ValidationErrors | null> => {
-    const url = 'http://localhost:4231/auth/check-email';
-    const value: string = control.value;
-
-    return this.http.post(url, { email: value }).pipe(
-      debounceTime(500),
-      map((data: any) => {
-        if (data) {
-          return { hasemail: true };
-        }
-        return null;
-      })
-    );
-  };
-
-  private minlen(limitednum: number): ValidatorFn {
-    return function (control: AbstractControl): ValidationErrors | null {
-      if (control.value.length < limitednum) {
-        return {
-          minlen: true,
-          requiredLength: limitednum,
-        };
-      }
-      return null;
-    };
+  onSubmit(){
+    this.accountService.findCurUser(this.loginForm.value)
+    console.log(this.accountService.curUser)
   }
 
-  private matchPwd = (group: FormGroup): ValidationErrors | null => {
-    const pwdval = group.get('password')?.value;
-    const cfmval = group.get('confirm')?.value;
-
-    if (pwdval !== cfmval) {
-      return { [this.pwdNotMatch]: true };
+  private asyncCheckEmail = async (control: FormControl) => {
+    if (this.accountService.checkEmail(control.value)) {
+      return { valid: true};
     }
-    return null;
+    return { valid: false };
   };
 
+  private asyncCheckPassword = async (control: FormControl) => {
+    if (this.accountService.checkPassword(this.email.value, control.value)) {
+      return {
+        valid: true,
+      };
+    }
+    return { valid: false };
+  };
+
+  
+
+  
+
 }
 
-
-
-
-interface ValidatorFn {
-  (control: AbstractControl): ValidationErrors | null;
-}
-
-interface AsyncValidatorFn {
-  (control: AbstractControl):
-    | Promise<ValidationErrors | null>
-    | Observable<ValidationErrors | null>;
-}
 
 

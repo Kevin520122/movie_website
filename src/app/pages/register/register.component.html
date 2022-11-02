@@ -27,7 +27,7 @@
         </div>
 
       </div>
-
+      <!-- password -->
       <div formGroupName="pwd">
         <input type="text" class="login__input" placeholder="Password" formControlName="password" />
         <input type="text" class="login__input" placeholder="Password Confirmation" formControlName="confirm" />
@@ -46,7 +46,24 @@
           password not matched!
         </div>
       </div>
-      <button type="submit" class="register-btn">Register</button>
+
+
+      <div class="rolesContainer" formGroupName="userroles">
+        <label for="roles">Roles:</label>
+        <select name="roles" class="rolesField" formControlName="role">
+          <option value="{{ roles[0] }}">{{ roles[0] }}</option>
+          <option value="{{ roles[1] }}">{{ roles[1] }}</option>
+          <option value="{{ roles[2] }}">{{ roles[2] }}</option>
+        </select>
+
+        <div
+          style="color: red; margin-left: 10px"
+          *ngIf="userroles.touched && !userroles.errors?.['selected']"
+        >
+          Please choose a role
+        </div>
+      </div>
+      <button type="submit" class="register-btn" [routerLink]="['/login']" (click)="onSubmit()">Register</button>
       <span>Already Have account <a routerLink="/login">*Login*</a></span>
     </div>
   </form>

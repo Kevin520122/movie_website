@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-header',
@@ -9,9 +10,13 @@ export class HeaderComponent implements OnInit {
   isLogIn: boolean = false;
   logo: string = "../assets/LOGO.png";
   userName: string = "kevin";
-  constructor() { }
 
-  ngOnInit(): void {
+  constructor(public accountService: AccountService) { }
+
+  ngOnInit(): void {}
+
+  onLogOut(){
+    this.accountService.curUser = {isLogin: false};
   }
 
 }

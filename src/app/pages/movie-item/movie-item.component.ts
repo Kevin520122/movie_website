@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
-import { Movie } from '../../interfaces/movie.interface';
+import { Movie } from '../../services/interfaces/movie.interface';
 
 @Component({
   selector: 'app-movie-item',

@@ -9,6 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { debounceTime, map, Observable, of } from 'rxjs';
+import { Roles } from 'src/app/services/interfaces/user.interface';
 import { AccountService } from '../../services/account.service';
 
 @Component({
@@ -21,6 +22,7 @@ export class RegisterComponent implements OnInit {
   emailList: string[] = [];
   registerForm!: FormGroup;
   pwdNotMatch = 'pwdNotMatch';
+  roles = Roles;
   
   get name(): FormControl{
     return this.registerForm.get('name') as FormControl;
@@ -32,6 +34,10 @@ export class RegisterComponent implements OnInit {
 
   get pwd(): FormGroup {
     return this.registerForm.get('pwd') as FormGroup;
+  }
+
+  get userroles(): FormGroup {
+    return this.registerForm.get('userroles') as FormGroup;
   }
   constructor(private fb: FormBuilder, private http: HttpClient, public accountService: AccountService) { }
   
@@ -48,16 +54,30 @@ export class RegisterComponent implements OnInit {
           validators: [this.matchPwd],
         }
       ),
+      userroles: this.fb.group(
+        {
+          role: ['', [Validators.required]],
+        },
+        {
+          validators: [],
+        }
+      )
     });
   }
 
   onSubmit(){
     console.log(this.registerForm.value);
-    this.accountService.accountlist.push(this.registerForm.value.email)
-    console.log(this.accountService.accountlist)
-    of(this.accountService.accountlist).subscribe((accounts) => {
-      console.log(accounts)
+    this.accountService.accountlist.push({
+      email: this.registerForm.value.email,
+      username: this.registerForm.value.name,
+      password: this.registerForm.value.pwd.password,
+      role: this.registerForm.value.userroles.role,
+      isLogin: false
     })
+    console.log(this.accountService.accountlist)
+    // of(this.accountService.accountlist).subscribe((accounts) => {
+    //   console.log(accounts)
+    // })
   }
 
   private asyncCheckEmail = (
@@ -68,11 +88,17 @@ export class RegisterComponent implements OnInit {
     return of(value).pipe(
       debounceTime(500),
       map((value) => {
-        if(this.accountService.accountlist.includes(value)){
-          return { hasemail: true };
-        }else{
-          return null;
-        }
+        let res;
+        let flag = false;
+        this.accountService.accountlist.forEach((account) => {
+            if(account.email === value){
+              res = { hasemail: true };
+              flag = true;
+            }
+        })
+        if(!flag){res =  null;}
+        return res
+        
       })
     )
 

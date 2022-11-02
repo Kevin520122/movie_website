@@ -2,10 +2,9 @@
     <div [routerLink]="['/']" class="logo">
         <img [src]="logo" alt="" />
     </div>
-    <div *ngIf="isLogIn ; else elseBlock" class="login">
-        <span>{{userName}}</span>
-        <button id="out">Log Out</button>
-        
+    <div *ngIf="this.accountService.curUser.isLogin ; else elseBlock" class="login">
+        <span>{{this.accountService.curUser.username}}</span>
+        <a [routerLink]="['/']" class="btn btn-rounded" (click)="onLogOut()">Log out</a>
     </div>
     <ng-template #elseBlock>
         <div class="button-area">

@@ -50,7 +50,7 @@
                 password is required
                 </div>
             </div>
-            <button [routerLink]="['/movies']" class="login__sign-in" type="button">Sign In</button>
+            <button [routerLink]="['/movies']" class="login__sign-in" type="button" (click)="onSubmit()" [disabled]="!this.accountService.isMatch(this.loginForm.value)">Sign In</button>
             <div class="login__secondary-cta"><a class="login__secondary-cta__text" href="#">Remember me</a><a
                     class="login__secondary-cta__text login__secondary-cta__text--need-help" href="#">Need help?</a></div>
         </div>
