@@ -26,37 +26,46 @@
     <a class="logo" [routerLink]="['/']" target="_blank">
         <img [src]="logo" alt="" />
     </a>
-    
+
 
     <form #loginform="ngForm" [formGroup]="loginForm">
         <div class="login">
             <h1 class="login-title">Sign In</h1>
             <div class="login-info">
-                <input class="login-info-input" type="text" formControlName='email' id="email" name="email"/>
+                <input class="login-info-input" type="text" formControlName='email' id="emailInput" name="email" #emailInput/>
                 <label class="login-info-label" for="email">Email</label>
             </div>
             <div *ngIf="!email?.valid && (email?.dirty ||email?.touched)">
                 <div *ngIf="email.errors?.['required']" class="invalid">
-                email is required
+                    email is required
                 </div>
             </div>
 
             <div class="login-info">
-                <input class="login-info-input" type="password"  formControlName='pwd' id="pwd" name="pwd"/>
+                <input class="login-info-input" type="password" formControlName='pwd' id="pwdInput" name="pwd" #pwdInput/>
                 <label class="login-info-label" for="pwd">Password</label>
             </div>
             <div *ngIf="!pwd?.valid && (pwd?.dirty || pwd?.touched)">
                 <div *ngIf="pwd.errors?.['required']" class="invalid">
-                password is required
+                    password is required
                 </div>
             </div>
-            <button [routerLink]="['/movies']" class="login__sign-in" type="button" (click)="onSubmit()" [disabled]="!this.accountService.isMatch(this.loginForm.value)">Sign In</button>
+            <button [routerLink]="['/movies']" class="login__sign-in" type="button" (click)="onSubmit()">Sign In</button>
             <div class="login__secondary-cta"><a class="login__secondary-cta__text" href="#">Remember me</a><a
-                    class="login__secondary-cta__text login__secondary-cta__text--need-help" href="#">Need help?</a></div>
+                    class="login__secondary-cta__text login__secondary-cta__text--need-help" href="#">Need help?</a>
+            </div>
+            <div class="register">
+                <div>New to K-Movie?</div>
+                <a routerLink="/register">Sign up now.</a>
+            </div>
+
         </div>
     </form>
+
     <!-- partial -->
 
 </body>
 
 </html>
+
+<!-- [disabled]="!this.accountService.isMatch(this.loginForm.value)" -->

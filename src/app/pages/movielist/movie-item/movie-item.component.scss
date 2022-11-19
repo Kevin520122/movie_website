@@ -31,7 +31,9 @@ img {
   object-fit: cover;
 }
 
-
+*{
+ 
+}
 
 /**
  * add button default
@@ -83,6 +85,18 @@ a {
 
   cursor: pointer;
   margin: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 50px;
+  list-style: none;
+
+  width: 350px;
+  height: 400px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 350px 400px;
+  overflow-y: hidden;
+  border-radius: 10px;
 }
 
 .movie-card .card-head {

@@ -1,10 +1,43 @@
-<app-header></app-header>
-<div class="movies-grid" 
-*ngFor="let movie of movielist"
-infinite-scroll
-  [infiniteScrollDistance]="2"
-  [infiniteScrollThrottle]="1000"
-  (scrolled)="onScroll()"
->
-    <app-movie-item [movie]="movie"></app-movie-item>
+<!-- <app-header></app-header> -->
+<div class="MainWrapper" (scrolled)="onScroll()" infinite-scroll [infiniteScrollDistance]="3"
+  [infiniteScrollThrottle]="500">
+  <div class="mainDivider">
+    <div class="listTitle">
+      <h1>Trending Movies</h1>
+      <!-- <button class="listScrollRight">
+        <i class="fas fa-angle-right"></i>
+      </button> -->
+    </div>
+    <app-movie-row [movies]="trendlist"></app-movie-row>
+
+    <div class="listTitle">
+      <h1>Top Rated Movies</h1>
+      <!-- <button class="listScrollRight">
+        <i class="fas fa-angle-right"></i>
+      </button> -->
+    </div>
+    <app-movie-row [movies]="toplist"></app-movie-row>
+
+
+    <div class="listTitle" style="padding-top: 100px; margin-bottom: 40px">
+      <h1>All Movies</h1>
+      <!-- <button class="listScrollRight">
+        <i class="fas fa-angle-right"></i>
+      </button> -->
+    </div>
+    <!-- <ul *ngFor="let movie of movielist" class="movies-grid" id="1">
+      <li>
+        <app-movie-item [movie]="movie" 
+        style="margin-right: 30px; margin-bottom: 100px">
+        </app-movie-item>
+      </li>
+    </ul> -->
+    <!-- <div class="movies-grid" *ngFor="let movie of movielist">
+      <app-movie-item [movie]="movie" style="width: 30%"></app-movie-item>
+    </div> -->
+
+    <ul class="movies-grid" *ngFor="let movie of movielist">
+      <li><app-movie-item [movie]="movie" style="width: 50%"></app-movie-item></li>
+    </ul>
+  </div>
 </div>

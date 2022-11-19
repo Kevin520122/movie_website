@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { CoreModule } from 'src/app/core/core.module';
+
 import { HeaderComponent } from 'src/app/shared/header/header.component';
 
 
@@ -16,7 +16,6 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    CoreModule,
     SharedModule,
     ReactiveFormsModule,
     FormsModule,
@@ -26,5 +25,6 @@ const routes: Routes = [
     HomeComponent,
     //HeaderComponent
   ],
+  exports: [RouterModule]
 })
 export class HomeModule {}

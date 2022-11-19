@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { CoreModule } from 'src/app/core/core.module';
+
 import { HeaderComponent } from 'src/app/shared/header/header.component';
 
 
@@ -12,12 +12,12 @@ import { RegisterComponent } from './register.component';
 
 
 const routes: Routes = [
-  { path: 'register', component: RegisterComponent }
+  { path: '', component: RegisterComponent }
 ];
 @NgModule({
   imports: [
     CommonModule,
-    CoreModule,
+   
     SharedModule,
     RouterModule.forChild(routes)
   ],
@@ -25,5 +25,6 @@ const routes: Routes = [
     //HeaderComponent,
     RegisterComponent
   ],
+  exports: [RouterModule],
 })
 export class RegisterModule {}

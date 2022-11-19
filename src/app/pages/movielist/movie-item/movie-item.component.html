@@ -55,27 +55,20 @@
     <img class="dribbble-link" src="https://image.flaticon.com/icons/png/512/124/124037.png">
   </a> -->
 
-  <div class="movie-card">
+  <div class="movie-card" (click)="movieDetails()">
 
     <div class="card-head">
       <img [src]="movie.img" alt="" class="card-img">
-
       <div class="card-overlay">
 <!-- 
         <div class="bookmark">
           <ion-icon name="bookmark-outline"></ion-icon>
         </div> -->
-
         <div class="rating">
-          
           <span>{{movie.rate}}</span>
         </div>
-
-        
-
       </div>
     </div>
-
     <div class="card-body">
       <h3 class="card-title">{{movie.title}}</h3>
 

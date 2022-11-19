@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MoviesService } from '../../services/movies.service';
+import { MoviesService } from '../../services/movies/movies.service';
 
 
 @Component({
@@ -9,20 +9,49 @@ import { MoviesService } from '../../services/movies.service';
 })
 export class MovielistComponent implements OnInit {
   movielist: any;
+  trendlist: any;
+  toplist: any;
+  popularlist: any;
+  pageNum: number = 1;
   constructor(public movieService: MoviesService) { }
 
   ngOnInit(): void {
-    this.movieService.getMovies().subscribe((data) => {
+    this.movieService.getMovies('top').subscribe((data) => {
       console.log(data);
-      this.movielist = data;
-    })
+      this.toplist = data;
+    });
+
+    this.movieService.getMovies('popular').subscribe((data) => {
+      console.log(data);
+      this.popularlist = data;
+    });
+
+    this.movieService.getMovies('trend').subscribe((data) => {
+      console.log(data);
+      this.trendlist = data;
+    });
+
+    this.movieService.getMovies('all', this.pageNum).subscribe(
+      (data) => {
+        console.log(data);
+        this.movielist = data;
+      }
+    );
+    
+    
+    // this.movieService.getMovies().subscribe((data) => {
+    //   console.log(data);
+    //   this.movielist = data;
+    // })
   }
 
   onScroll(){
-    this.movieService.getMovies().subscribe((data) => {
+    this.movieService.getMovies("all", ++this.pageNum).subscribe((data) => {
       console.log(data);
       this.movielist.push(...data);
     })
   }
+
+  
 
 }

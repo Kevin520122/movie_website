@@ -125,3 +125,22 @@ body {
   .invalid, div{
     color:red;
   }
+
+  .register {
+    display: flex;
+    flex-direction: row;
+    height: 150px;
+    align-items: flex-end;
+    color: rgb(148, 148, 148);
+    font-size: 20px;
+  }
+  
+  .register a {
+    padding-left: 5px;
+    text-decoration: none;
+    color: white;
+  }
+  
+  .register a:hover {
+    text-decoration: underline;
+  }

@@ -3,5 +3,7 @@ export interface Movie{
     language: string,
     title: string,
     overview: string,
-    rate: number
+    rate: number,
+    id: number;
+    trailerKey: string
 }

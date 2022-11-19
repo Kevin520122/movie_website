@@ -1,14 +1,47 @@
 <header class="showcase-top">
-    <div [routerLink]="['/']" class="logo">
+    <div routerLink='/' class="logo">
         <img [src]="logo" alt="" />
     </div>
-    <div *ngIf="this.accountService.curUser.isLogin ; else elseBlock" class="login">
-        <span>{{this.accountService.curUser.username}}</span>
-        <a [routerLink]="['/']" class="btn btn-rounded" (click)="onLogOut()">Log out</a>
+
+    <a routerLink='/userProfile' class="btn btn-rounded" >Change Roles</a>
+    <div *ngIf="this.authService.userValue ; else elseBlock" class="login">
+      
+        <p class="name">{{this.accountService.curUser.username}}</p>
+        <div class="btn-area">
+            <a routerLink='/' class="btn btn-rounded" (click)="onLogOut()">Log out</a>
+            <!-- <div mdbDropdown class="dropdown">
+                <button
+                  class="btn btn-primary dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  aria-expanded="false"
+                  mdbDropdownToggle
+                >
+                  Settings
+                </button>
+                <ul mdbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li><a class="dropdown-item" href="#">Change Roles</a></li>
+                </ul>
+              </div> -->
+              
+        </div>
+        <!-- <div *ngIf="isClickSetting">
+            <a *ngFor="let mi of settings">
+                <span class="dropdown-menu-container">
+                <mat-icon mat-list-icon>{{ mi.icon }}</mat-icon> 
+                <span class="dropdown-menu-item">{{ mi.value }}</span>
+                </span>
+                <div class="submenu-container">
+                <span *ngFor="let sub of mi.subMenu;let j = index" class="submenu-item"
+                    (click)="onClick($event, i, j)"> {{ sub.text }}</span> 
+                </div> 
+            </a>
+          </div> -->
     </div>
     <ng-template #elseBlock>
         <div class="button-area">
             <a [routerLink]="['/login']" class="btn btn-rounded">Log in</a>
         </div>
+       
     </ng-template>
 </header>
